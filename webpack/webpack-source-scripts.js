@@ -24,12 +24,12 @@ export default () => {
 							options: {
 								babelrc: false,
 								plugins: [
-									'transform-runtime',
+									'@babel/plugin-syntax-dynamic-import',
+									'@babel/plugin-transform-runtime',
 								],
 								presets: [
-									'env',
-									'flow',
-									'stage-2',
+									'@babel/preset-env',
+									'@babel/preset-flow',
 								],
 							},
 						},

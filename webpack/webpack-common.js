@@ -14,9 +14,9 @@ export default () => {
 			filename: '[name].js',
 			//publicPath: '/',
 		},
-		stats: false,
+		//	stats: false,
 		devServer: {
-			stats: 'none',
+			//	stats: 'none',
 			historyApiFallback: {
 				rewrites: [
 					{
