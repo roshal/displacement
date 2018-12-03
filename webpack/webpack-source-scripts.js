@@ -1,3 +1,4 @@
+//
 import {
 	join as p__path__join,
 } from 'path'
@@ -35,54 +36,54 @@ export default () => {
 						},
 					],
 				},
-				//{
-				//	enforce: 'pre',
-				//	resource: {
-				//		exclude: [
-				//			/(?:\/|\\)node_modules(?:\/|\\)/,
-				//		],
-				//		include: [
-				//			/\.js$/,
-				//		],
-				//	},
-				//	use: [
-				//		{
-				//			loader: 'eslint',
-				//			options: {
-				//				ignore: false,
-				//				useEslintrc: false,
-				//				parser: 'babel-eslint',
-				//				envs: [
-				//					'browser',
-				//				],
-				//				rules: {
-				//					'comma-dangle': [
-				//						'error',
-				//						'always-multiline',
+				//	{
+				//		enforce: 'pre',
+				//		resource: {
+				//			exclude: [
+				//				/(?:\/|\\)node_modules(?:\/|\\)/,
+				//			],
+				//			include: [
+				//				/\.js$/,
+				//			],
+				//		},
+				//		use: [
+				//			{
+				//				loader: 'eslint',
+				//				options: {
+				//					ignore: false,
+				//					useEslintrc: false,
+				//					parser: 'babel-eslint',
+				//					envs: [
+				//						'browser',
 				//					],
-				//					'indent': [
-				//						'error',
-				//						'tab',
-				//					],
-				//					'no-mixed-spaces-and-tabs': [
-				//						'error',
-				//					],
-				//					'no-unused-vars': [
-				//						'warn',
-				//					],
-				//					'quotes': [
-				//						'warn',
-				//						'single',
-				//					],
-				//					'semi': [
-				//						'error',
-				//						'never',
-				//					],
+				//					rules: {
+				//						'comma-dangle': [
+				//							'error',
+				//							'always-multiline',
+				//						],
+				//						'indent': [
+				//							'error',
+				//							'tab',
+				//						],
+				//						'no-mixed-spaces-and-tabs': [
+				//							'error',
+				//						],
+				//						'no-unused-vars': [
+				//							'warn',
+				//						],
+				//						'quotes': [
+				//							'warn',
+				//							'single',
+				//						],
+				//						'semi': [
+				//							'error',
+				//							'never',
+				//						],
+				//					},
 				//				},
 				//			},
-				//		},
-				//	],
-				//},
+				//		],
+				//	},
 			],
 		},
 	}

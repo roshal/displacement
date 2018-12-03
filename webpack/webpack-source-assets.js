@@ -1,3 +1,4 @@
+//
 import {
 	join as p__path__join,
 } from 'path'

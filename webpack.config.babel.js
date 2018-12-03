@@ -1,3 +1,4 @@
+//
 import p__webpack_merge from 'webpack-merge'
 //
 export default (env) => {
@@ -7,12 +8,12 @@ export default (env) => {
 	}
 	return p__webpack_merge(
 		webpack('common'),
-		...env.analyze ? [webpack('mode-analyze')] : [],
-		...env.develop ? [webpack('mode-develop')] : [],
-		...env.produce ? [webpack('mode-produce')] : [],
 		webpack('source-assets'),
 		webpack('source-scripts'),
 		webpack('source-styles'),
 		webpack('source-templates'),
+		...env.analyze ? [webpack('mode-analyze')] : [],
+		...env.develop ? [webpack('mode-develop')] : [],
+		...env.produce ? [webpack('mode-produce')] : [],
 	)
 }

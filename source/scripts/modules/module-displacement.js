@@ -1,3 +1,4 @@
+//
 export default async () => {
 	const pixi = await import('pixi.js')
 	const container_center = (
