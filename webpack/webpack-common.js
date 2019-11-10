@@ -1,17 +1,18 @@
-//
-import p__webpack_stylish from 'webpack-stylish'
-//
-import {
-	join as p__path__join,
-} from 'path'
-//
+
+const p__path = require('path')
+const p__webpack_stylish = require('webpack-stylish')
+
+const m__alias = require('../alias')
+
+
 export default () => {
 	return {
-		context: p__path__join(__dirname, '..', 'source'),
+		context: p__path.resolve('source'),
 		entry: {
 			'source': './scripts/sources/source.js',
 		},
 		output: {
+			path: p__path.resolve('public'),
 			chunkFilename: 'scripts/[id].js',
 			filename: '[name].js',
 		},
@@ -31,14 +32,12 @@ export default () => {
 		//		},
 		//	},
 		resolve: {
-			alias: {
-				'': p__path__join(__dirname, '..', 'source', 'scripts'),
-			},
+			alias: m__alias,
 			extensions: [
 				'.js',
 			],
 			modules: [
-				p__path__join(__dirname, '..', 'node_modules'),
+				p__path.resolve('node_modules'),
 			],
 		},
 		plugins: [

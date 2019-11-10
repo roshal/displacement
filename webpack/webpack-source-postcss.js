@@ -1,13 +1,11 @@
-//
-import p__cssnano from 'cssnano'
-//	import p__mini_css_extract_plugin from 'mini-css-extract-plugin'
-import p__postcss_easy_import from 'postcss-easy-import'
-import p__precss from 'precss'
-//
-import {
-	join as p__path__join,
-} from 'path'
-//
+
+const p__cssnano = require('cssnano')
+//	const p__mini_css_extract_plugin = require('mini-css-extract-plugin')
+const p__path = require('path')
+const p__postcss_easy_import = require('postcss-easy-import')
+const p__precss = require('precss')
+
+
 export default (env) => {
 	return {
 		module: {
@@ -15,7 +13,7 @@ export default (env) => {
 				{
 					resource: {
 						include: [
-							p__path__join(__dirname, '..', 'source', 'styles'),
+							p__path.resolve('source', 'styles'),
 						],
 						test: [
 							/\.sass$/,

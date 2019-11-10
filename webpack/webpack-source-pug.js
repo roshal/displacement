@@ -1,8 +1,7 @@
-//
-import {
-	join as p__path__join,
-} from 'path'
-//
+
+const p__path = require('path')
+
+
 export default (env) => {
 	return {
 		module: {
@@ -10,7 +9,7 @@ export default (env) => {
 				{
 					resource: {
 						include: [
-							p__path__join(__dirname, '..', 'source', 'templates'),
+							p__path.resolve('pug'),
 						],
 						test: [
 							/\.pug$/,

@@ -1,8 +1,7 @@
-//
-import {
-	join as p__path__join,
-} from 'path'
-//
+
+const p__path = require('path')
+
+
 export default () => {
 	return {
 		module: {
@@ -10,14 +9,14 @@ export default () => {
 				{
 					resource: {
 						include: [
-							p__path__join(__dirname, '..', 'source', 'assets'),
+							p__path.resolve('source', 'assets'),
 						],
 					},
 					use: [
 						{
 							loader: 'file-loader',
 							options: {
-								context: p__path__join(__dirname, '..', 'source', 'assets'),
+								context: p__path.resolve('source', 'assets'),
 								name: '[name].[ext]',
 								useRelativePath: true,
 							},

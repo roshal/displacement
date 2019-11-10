@@ -2,6 +2,7 @@
 /*
 
 !/docs/
+!/pug/
 !/source/
 !/webpack/
 
@@ -12,6 +13,7 @@
 !/.gitignore
 !/.yarnrc
 
+!/alias.config.js
 !/babel.config.js
 !/commands.sh
 !/firebase.json

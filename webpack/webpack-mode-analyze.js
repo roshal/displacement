@@ -1,6 +1,7 @@
-//
-import p__webpack_bundle_analyzer from 'webpack-bundle-analyzer'
-//
+
+const p__webpack_bundle_analyzer = require('webpack-bundle-analyzer')
+
+
 export default () => {
 	return {
 		plugins: [

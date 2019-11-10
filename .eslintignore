@@ -4,5 +4,6 @@
 !/source/
 !/webpack/
 
+!/alias.config.js
 !/babel.config.js
 !/webpack.config.js

@@ -1,8 +1,7 @@
-//
-import {
-	join as p__path__join,
-} from 'path'
-//
+
+const p__path = require('path')
+
+
 export default () => {
 	return {
 		mode: 'development',
@@ -10,8 +9,5 @@ export default () => {
 			port: 80,
 		},
 		devtool: 'source-map',
-		output: {
-			path: p__path__join(__dirname, '..', 'output'),
-		},
 	}
 }

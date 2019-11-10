@@ -1,8 +1,7 @@
-//
-import {
-	join as p__path__join,
-} from 'path'
-//
+
+const p__path = require('path')
+
+
 export default () => {
 	return {
 		module: {
