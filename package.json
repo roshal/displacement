@@ -1,14 +1,10 @@
 {
-  "license": "MIT",
   "engines": {
-    "node": "^10.1",
-    "yarn": "^1.10"
+    "node": ">=12"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "pixi.js": "^4.8.2"
-  },
-  "devDependencies": {
+    "pixi.js": "^4.8.2",
     "@babel/core": "^7.1.6",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
@@ -45,5 +41,6 @@
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4",
     "webpack-stylish": "^0.1.8"
-  }
+  },
+	"license": "UNLICENSED"
 }

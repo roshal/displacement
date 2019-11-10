@@ -1,3 +1,8 @@
-/output/
-/public/
-/source/
+
+/
+
+!/source/
+!/webpack/
+
+!/babel.config.js
+!/webpack.config.js

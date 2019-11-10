@@ -1,37 +1,32 @@
+
 scripts:
-  develop:
-    default: nps server.develop
-  produce:
-    default: nps server.produce
-  reduce:
-    default: nps build.produce firebase.deploy
-  lint:
-    default: eslint .
+
+  develop: nps server.develop
+  produce: nps server.produce
+
+  release: nps clean build.produce firebase.deploy
+
+  lint: nps eslint
+
+  clean: rm -fr public/*
+
   build:
-    default: concurrent "nps build.develop" "nps build.produce"
-    develop: nps clean.output webpack.develop
-    produce: nps clean.public webpack.produce
-  watch:
-    default: concurrent "nps watch.develop" "nps watch.produce"
-    develop: nps clean.output webpack.watch.develop
-    produce: nps clean.public webpack.watch.produce
-  server:
-    default: concurrent "nps server.develop" "nps server.produce"
-    develop: webpack-dev-server --hot --progress --env.develop
-    produce: webpack-dev-server --hot --progress --env.produce
-  webpack:
-    default: concurrent "nps webpack.develop" "nps webpack.produce"
     develop: webpack --env.develop
     produce: webpack --env.produce
-    watch:
-      default: concurrent "nps webpack.watch.develop" "nps webpack.watch.produce"
-      develop: webpack -w --env.develop
-      produce: webpack -w --env.produce
-  clean:
-    default: concurrent "nps clean.output" "nps clean.public"
-    output: rm -fr output/*
-    public: rm -fr public/*
+
+  watch:
+    develop: webpack --env.develop --watch
+    produce: webpack --env.produce --watch
+
+  serve:
+    develop: webpack-dev-server --hot --progress --env.develop
+    produce: webpack-dev-server --hot --progress --env.produce
+
+  eslint:
+    default: 'eslint .',
+    fix: 'eslint --fix .',
+
   firebase:
-    default: nps firebase.deploy
     deploy: firebase deploy
+    login: firebase login
     serve: firebase serve

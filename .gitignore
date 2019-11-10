@@ -1,17 +1,20 @@
+
 /*
 
+!/docs/
 !/source/
 !/webpack/
 
-!/.babelrc
 !/.editorconfig
 !/.eslintignore
 !/.eslintrc.yaml
 !/.firebaserc
 !/.gitignore
 !/.yarnrc
+
+!/babel.config.js
 !/commands.sh
 !/firebase.json
 !/package-scripts.yml
 !/package.json
-!/webpack.config.babel.js
+!/webpack.config.js
