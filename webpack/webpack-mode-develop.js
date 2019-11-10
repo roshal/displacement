@@ -1,13 +1,7 @@
 
-const p__path = require('path')
-
-
-export default () => {
+module.exports = (env = {}, argv = {}) => {
 	return {
 		mode: 'development',
-		devServer: {
-			port: 80,
-		},
 		devtool: 'source-map',
 	}
 }

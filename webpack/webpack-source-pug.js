@@ -2,7 +2,7 @@
 const p__path = require('path')
 
 
-export default (env) => {
+module.exports = (env = {}, argv = {}) => {
 	return {
 		module: {
 			rules: [
@@ -45,8 +45,7 @@ export default (env) => {
 						{
 							loader: 'pug-loader',
 							options: {
-								// deprecated
-								pretty: env.develop ? '\t' : false,
+								pretty: argv.develop ? '\t' : false,
 							},
 						},
 					],

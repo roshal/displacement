@@ -4,6 +4,9 @@
 !/source/
 !/webpack/
 
-!/alias.config.js
+!/alias.js
 !/babel.config.js
+!/jest.config.js
+!/package-scripts.js
+!/postcss.config.js
 !/webpack.config.js

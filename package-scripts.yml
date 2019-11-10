@@ -1,8 +1,8 @@
 
 scripts:
 
-  develop: nps server.develop
-  produce: nps server.produce
+  develop: nps serve.develop
+  produce: nps serve.produce
 
   release: nps clean build.produce firebase.deploy
 
@@ -11,20 +11,20 @@ scripts:
   clean: rm -fr public/*
 
   build:
-    develop: webpack --env.develop
-    produce: webpack --env.produce
+    develop: webpack --develop
+    produce: webpack --produce
 
   watch:
-    develop: webpack --env.develop --watch
-    produce: webpack --env.produce --watch
+    develop: webpack --develop --watch
+    produce: webpack --produce --watch
 
   serve:
-    develop: webpack-dev-server --hot --progress --env.develop
-    produce: webpack-dev-server --hot --progress --env.produce
+    develop: webpack-dev-server --develop --hot --progress
+    produce: webpack-dev-server --produce --hot --progress
 
   eslint:
-    default: 'eslint .',
-    fix: 'eslint --fix .',
+    default: eslint .
+    fix: eslint --fix .
 
   firebase:
     deploy: firebase deploy

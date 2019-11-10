@@ -6,17 +6,17 @@ const p__postcss_easy_import = require('postcss-easy-import')
 const p__precss = require('precss')
 
 
-export default (env) => {
+module.exports = (env = {}, argv = {}) => {
 	return {
 		module: {
 			rules: [
 				{
 					resource: {
 						include: [
-							p__path.resolve('source', 'styles'),
+							p__path.resolve('styles'),
 						],
 						test: [
-							/\.sass$/,
+							/\.sss$/,
 						],
 					},
 					use: [
@@ -31,19 +31,19 @@ export default (env) => {
 						{
 							loader: 'extract-loader',
 							options: {
-								sourceMap: env.develop,
+								sourceMap: argv.develop,
 							},
 						},
 						{
 							loader: 'css-loader',
 							options: {
 								//	modules: true,
-								//	minimize: env.produce ? {
+								//	minimize: argv.produce ? {
 								//		discardComments: {
 								//			removeAll: true,
 								//		},
 								//	} : false,
-								sourceMap: env.develop,
+								sourceMap: argv.develop,
 								importLoaders: 1,
 							},
 						},
@@ -58,7 +58,7 @@ export default (env) => {
 										],
 									}),
 									p__precss(),
-									...env.produce ? [
+									...argv.produce ? [
 										p__cssnano({
 											discardComments: {
 												removeAll: true,
@@ -66,7 +66,7 @@ export default (env) => {
 										}),
 									] : [],
 								],
-								sourceMap: env.develop,
+								sourceMap: argv.develop,
 							},
 						},
 					],

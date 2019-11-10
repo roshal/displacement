@@ -2,17 +2,14 @@
 const p__path = require('path')
 
 
-export default () => {
+module.exports = (env = {}, argv = {}) => {
 	return {
 		module: {
 			rules: [
 				{
 					resource: {
-						exclude: [
-							p__path__join(__dirname, '..', 'node_modules'),
-						],
 						include: [
-							p__path__join(__dirname, '..', 'source', 'scripts'),
+							p__path.resolve('source'),
 						],
 						test: [
 							/\.js$/,

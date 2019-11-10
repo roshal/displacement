@@ -1,9 +1,12 @@
 
 /*
 
+!/assets/
 !/docs/
+!/images/
 !/pug/
 !/source/
+!/styles/
 !/webpack/
 
 !/.editorconfig
@@ -13,10 +16,11 @@
 !/.gitignore
 !/.yarnrc
 
-!/alias.config.js
+!/alias.js
 !/babel.config.js
 !/commands.sh
 !/firebase.json
 !/package-scripts.yml
 !/package.json
+!/postcss.config.js
 !/webpack.config.js

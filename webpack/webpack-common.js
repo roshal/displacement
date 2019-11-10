@@ -1,36 +1,23 @@
 
 const p__path = require('path')
-const p__webpack_stylish = require('webpack-stylish')
 
 const m__alias = require('../alias')
 
 
-export default () => {
+module.exports = (env = {}, argv = {}) => {
 	return {
 		context: p__path.resolve('source'),
 		entry: {
-			'source': './scripts/sources/source.js',
+			'index': './sources/index.js',
 		},
 		output: {
 			path: p__path.resolve('public'),
-			chunkFilename: 'scripts/[id].js',
+			chunkFilename: 'assets/[id].js',
 			filename: '[name].js',
 		},
-		//	devServer: {
-		//		historyApiFallback: {
-		//			rewrites: [
-		//				{
-		//					to: '/source.html',
-		//				},
-		//			],
-		//		},
-		//		proxy: {
-		//			'/api/': {
-		//				changeOrigin: true,
-		//				target: 'http://localhost:8080/api/',
-		//			},
-		//		},
-		//	},
+		devServer: {
+			port: argv.port || 1024,
+		},
 		resolve: {
 			alias: m__alias,
 			extensions: [
@@ -40,8 +27,5 @@ export default () => {
 				p__path.resolve('node_modules'),
 			],
 		},
-		plugins: [
-			new p__webpack_stylish(),
-		],
 	}
 }
