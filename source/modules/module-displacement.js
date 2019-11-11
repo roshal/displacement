@@ -1,192 +1,122 @@
+console.log(1)
+const pixi = require('pixi.js')
 
-export default async () => {
-	const pixi = await import('pixi.js')
-	const container_center = (
-		container,
-		//	size,
-	) => {
-		//	container.position.x = size.x / 2
-		//	container.position.y = size.y / 2
-		container.pivot.set(
-			container.width / 2,
-			container.height / 2,
-		)
-	}
-	const container_tile = (
-		texture,
-		limit = {
-			x: 0,
-			y: 0,
-		},
-		scale = 1,
-		padding = 0,
-	) => {
-		const container = new pixi.Container()
-		const offset = {
-			x: 0,
-			y: 0,
-		}
-		while (offset.x < limit.x) {
-			offset.y = 0
-			while (offset.y < limit.y) {
-				const sprite = new pixi.Sprite(
-					texture,
-				)
-				sprite.anchor.set(0.5)
-				sprite.scale.x = (offset.x % 2 * 2 - 1) * scale
-				sprite.scale.y = (offset.y % 2 * 2 - 1) * scale
-				sprite.position.x = (offset.x + 0.5) * (padding + sprite.width)
-				sprite.position.y = (offset.y + 0.5) * (padding + sprite.height)
-				container.addChild(
-					sprite,
-				)
-				offset.y += 1
-			}
-			offset.x += 1
-		}
-		return container
-	}
+
+const loader = new pixi.Loader()
+
+const container_center = (container) => {
+	//container.position.x = size.x / 2
+	//container.position.y = size.y / 2
+	container.pivot.set(container.width / 2, container.height / 2)
+}
+
+const container_tile = (
+	texture,
+	limit = {
+		x: 0,
+		y: 0,
+	},
+	scale = 1,
+	padding = 0,
+) => {
+	const container = new pixi.Container()
+	const array = []
 	{
-		const object = {
-			'back': require.resolve('/assets/tile.jpg'),
-			'mask': require.resolve('/assets/mask.jpg'),
-			//	'back_sweet': '//i.imgur.com/I17husy.png',
-			//	'back_black': '//i.imgur.com/1tpzTTg.png',
-			//	'back_brown': '//i.imgur.com/wIJn3tP.png',
-			//	'back_color': '//i.imgur.com/FNmIdxF.jpg',
-			//	'mask_duet': '//i.imgur.com/EVcGslR.png',
-			//	'mask_mash': '//i.imgur.com/2uFGaRG.png',
+		let x = 0
+		while (x < limit.x) {
+			let y = 0
+			while (y < limit.y) {
+				array.push([x, y])
+				y += 1
+			}
+			x += 1
 		}
-		Object.keys(object).map(
-			(
-				key,
-			) => {
-				pixi.loader.add(
-					key,
-					object[key],
-				)
-			},
-		)
 	}
-	const size = {
-		x: 1 << 9,
-		y: 1 << 9,
+	for (const [x, y] of array) {
+		const sprite = new pixi.Sprite(texture)
+		sprite.anchor.set(0.5)
+		sprite.scale.x = scale * (x % 2 * 2 - 1)
+		sprite.scale.y = scale * (y % 2 * 2 - 1)
+		sprite.position.x = (x + 0.5) * (padding + sprite.width)
+		sprite.position.y = (y + 0.5) * (padding + sprite.height)
+		container.addChild(sprite)
 	}
-	const application = new pixi.Application(
-		size.x,
-		size.y,
-	)
-	const dictionary = {}
-	const back = 'back'
-	const mask = 'mask'
-	pixi.loader.load(
-		(
-			loader,
-			resources,
-		) => {
-			void [
-				back,
-				mask,
-			].map(
-				(
-					item,
-				) => {
-					let texture = resources[item].texture
-					const length = {
-						x: texture.width,
-						y: texture.height,
-					}
-					const container = container_tile(
-						texture,
-						{
-							x: 4,
-							y: 4,
-						},
-					)
-					texture = new pixi.RenderTexture.create(
-						container.width,
-						container.height,
-					)
-					application.renderer.render(container, texture)
-					const sprite = new pixi.Sprite(
-						texture,
-					)
-					//	dictionary[item] = new pixi.extras.TilingSprite(
-					//		texture,
-					//		container.width << 2,
-					//		container.height << 2,
-					//	)
-					container_center(
-						sprite,
-					)
-					//	container.scale.set(
-					//		Math.max(
-					//			size.x / container.width,
-					//			size.h / container.height,
-					//		) * 2,
-					//	)
-					dictionary[item] = {
-						length,
-						offset: {
-							x: 0,
-							y: 0,
-						},
-						sprite,
-					}
+	return container
+}
+
+//const resources = {
+//	tile_sweet: '//i.imgur.com/I17husy.png',
+//	tile_black: '//i.imgur.com/1tpzTTg.png',
+//	tile_brown: '//i.imgur.com/wIJn3tP.png',
+//	tile_color: '//i.imgur.com/FNmIdxF.jpg',
+//	mask_duet: '//i.imgur.com/EVcGslR.png',
+//	mask_mash: '//i.imgur.com/2uFGaRG.png',
+//}
+
+const resources = {
+	tile: require('//images/tile.jpg'),
+	mask: require('//images/mask.png'),
+}
+
+const application = new pixi.Application()
+
+const process = (loader, resources) => {
+	{
+		const dictionary = {}
+		for (const key in resources) {
+			let texture = resources[key].texture
+			const length = {
+				x: texture.width,
+				y: texture.height,
+			}
+			const container = container_tile(texture, {
+				x: 8,
+				y: 8,
+			})
+			texture = new pixi.RenderTexture.create(container.width, container.height)
+			application.renderer.render(container, texture)
+			const sprite = new pixi.Sprite(texture)
+			container_center(sprite)
+			dictionary[key] = {
+				length,
+				offset: {
+					x: 0,
+					y: 0,
 				},
-			)
-			void [
-				back,
-				mask,
-			].map(
-				(
-					item,
-				) => {
-					application.stage.addChild(
-						dictionary[item].sprite,
-					)
-				},
-			)
-			dictionary[back].sprite.filters = [
-				mask,
-			].map(
-				(
-					item,
-				) => {
-					const filter = new pixi.filters.DisplacementFilter(
-						dictionary[item].sprite,
-						1 << 8,
-					)
-					filter.autoFit = false
-					return filter
-				},
-			)
-			application.ticker.add(
-				(
-					time,
-				) => {
-					//	time *= 1 << 2
-					//	dictionary[back].sprite.rotation += time / 256
-					//	dictionary[back].sprite.rotation %= 360
-					//	dictionary[mask].sprite.rotation -= time / 256
-					//	dictionary[mask].sprite.rotation %= 360
-					dictionary[back].offset.x += time
-					dictionary[mask].offset.x += time
-					dictionary[back].offset.y += time
-					dictionary[mask].offset.y += time
-					dictionary[back].offset.x %= 2 * dictionary[back].length.x
-					dictionary[mask].offset.x %= 2 * dictionary[mask].length.x
-					dictionary[back].offset.y %= 2 * dictionary[back].length.y
-					dictionary[mask].offset.y %= 2 * dictionary[mask].length.y
-					dictionary[back].sprite.position.x = dictionary[back].length.x - dictionary[back].offset.x
-					dictionary[mask].sprite.position.x = dictionary[mask].offset.x - dictionary[mask].length.x
-					dictionary[back].sprite.position.y = dictionary[back].offset.y - dictionary[back].length.y
-					dictionary[mask].sprite.position.y = dictionary[mask].length.y - dictionary[mask].offset.y
-				},
-			)
-			document.body.appendChild(
-				application.view,
-			)
-		},
-	)
+				sprite,
+			}
+			application.stage.addChild(dictionary[key].sprite)
+		}
+		//dictionary['mask'].sprite.filters = [
+		//	new pixi.filters.AlphaFilter(0.8),
+		//]
+		const filter = new pixi.filters.DisplacementFilter(dictionary['mask'].sprite, 1 << 8)
+		filter.autoFit = false
+		dictionary['tile'].sprite.filters = [
+			filter,
+		]
+		let number = 1
+		for (const key in resources) {
+			const sign = number
+			number *= -1
+			application.ticker.add((time) => {
+				time <<= 0
+				//time <<= 3
+				//time *= 8
+				//dictionary[key].sprite.rotation = (dictionary[key].sprite.rotation + time) % 360
+				dictionary[key].offset.x = (dictionary[key].offset.x + time) % (2 * dictionary[key].length.x)
+				dictionary[key].offset.y = (dictionary[key].offset.y + time) % (2 * dictionary[key].length.y)
+				dictionary[key].sprite.position.x = sign * (dictionary[key].length.x - dictionary[key].offset.x)
+				dictionary[key].sprite.position.y = sign * (dictionary[key].offset.y - dictionary[key].length.y)
+			})
+		}
+		document.body.appendChild(application.view)
+	}
+}
+
+export default () => {
+	for (const key in resources) {
+		application.loader.add(key, resources[key])
+	}
+	application.loader.load(process)
 }

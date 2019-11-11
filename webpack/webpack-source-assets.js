@@ -16,9 +16,24 @@ module.exports = (env = {}, argv = {}) => {
 						{
 							loader: 'file-loader',
 							options: {
+								name: '[path][name].[ext]',
 								context: p__path.resolve('assets'),
-								name: '[name].[ext]',
-								useRelativePath: true,
+							},
+						},
+					],
+				},
+				{
+					resource: {
+						include: [
+							p__path.resolve('images'),
+						],
+					},
+					use: [
+						{
+							loader: 'file-loader',
+							options: {
+								name: '[path][name].[ext]',
+								context: p__path.resolve(),
 							},
 						},
 					],

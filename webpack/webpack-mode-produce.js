@@ -1,6 +1,5 @@
 
-import p__uglifyjs_webpack_plugin from 'uglifyjs-webpack-plugin'
-import p__webpack__optimize from 'webpack'
+const p__terser_webpack_plugin = require('terser-webpack-plugin')
 
 
 module.exports = (env = {}, argv = {}) => {
@@ -10,22 +9,17 @@ module.exports = (env = {}, argv = {}) => {
 			compress: true,
 			https: true,
 		},
-		plugins: [
-			new p__webpack__optimize.LimitChunkCountPlugin({
-				maxChunks: 1,
-			}),
-		],
 		optimization: {
 			minimizer: [
-				new p__uglifyjs_webpack_plugin({
-					parallel: true,
-					uglifyOptions: {
-						toplevel: true,
+				new p__terser_webpack_plugin({
+					extractComments: false,
+					terserOptions: {
+						cache: true,
+						parallel: true,
 						output: {
 							comments: false,
 						},
 					},
-					//	extractComments: true,
 				}),
 			],
 		},

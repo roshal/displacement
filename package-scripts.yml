@@ -28,5 +28,7 @@ scripts:
 
   firebase:
     deploy: firebase deploy
-    login: firebase login
+    login:
+      default: firebase login
+      reauth: firebase login --reauth
     serve: firebase serve
